@@ -73,3 +73,52 @@ Suggests some FPGA development boards that you can use for this book’s project
 ### Appendix B: Tips for a Career in FPGA Engineering
 
 Outlines strategies for finding an FPGA-related job, in case you want to pursue FPGA design professionally. I’ll make suggestions on how to build a good resume, prepare for interviews, and negotiate for the best-possible job offer.
+
+## Yosys build
+
+Makefiles are provided to build and flash projects using yosys
+
+### Yosys dependencies
+
+#### Yosys
+
+open-source synthesis tool
+
+https://github.com/YosysHQ/yosys.git
+
+#### GHDL
+
+open-source VHDL compiler and simulator
+
+https://github.com/ghdl/ghdl.git
+
+#### GHDL-yosys-plugin
+
+Allows yosys to synthesize VHDL
+
+https://github.com/ghdl/ghdl-yosys-plugin.git
+
+once that project is built the shared library needs to be put in the yosys plugins folder
+
+```bash
+mkdir /usr/share/yosys/plugins
+cp ghdl.so /usr/share/yosys/plugins
+```
+
+#### Nextpnr
+
+open-source place and route tool
+
+https://github.com/YosysHQ/nextpnr.git
+
+#### Icestorm
+
+open-source tool for creating bitstream files
+
+https://github.com/YosysHQ/icestorm.git
+
+in order to upload binaries to the FPGA, create a file `/etc/udev/rules.d/53-lattice-ftdi.rules` with these contents
+
+```text
+ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6010", MODE="0660", GROUP="plugdev", TAG+="uaccess"
+```
