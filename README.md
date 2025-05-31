@@ -100,6 +100,8 @@ https://github.com/ghdl/ghdl-yosys-plugin.git
 
 once that project is built the shared library needs to be put in the yosys plugins folder
 
+for linux
+
 ```bash
 mkdir /usr/share/yosys/plugins
 cp ghdl.so /usr/share/yosys/plugins
@@ -117,8 +119,37 @@ open-source tool for creating bitstream files
 
 https://github.com/YosysHQ/icestorm.git
 
+for linux
+
 in order to upload binaries to the FPGA, create a file `/etc/udev/rules.d/53-lattice-ftdi.rules` with these contents
 
 ```text
 ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6010", MODE="0660", GROUP="plugdev", TAG+="uaccess"
 ```
+
+### Yosys sdk install
+
+only works for linux
+
+First install the yosys dependencies by running the script `install_yosys_dependencies.sh`
+
+`install_yosys_dependencies.sh` only works for ubuntu.
+
+```bash
+cd scripts
+./install_yosys_dependencies.sh
+```
+
+then install the sdk, once the dependencies are install this should work for any linux distro
+
+```bash
+./install_yosys_sdk.sh
+```
+
+then source the sdk
+
+```bash
+source yosys_sdk
+```
+
+to make sure the sdk is sourced run `yosys --help`
