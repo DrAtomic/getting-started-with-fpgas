@@ -4,4 +4,3 @@ PREFIX="$ROOT_DIR/tools"
 BIN_DIR="$PREFIX/bin"
 
 export PATH="$BIN_DIR:$PATH"
-export PATH="$PREFIX/usr/local/bin:$PATH"

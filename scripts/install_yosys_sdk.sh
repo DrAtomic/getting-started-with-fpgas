@@ -7,9 +7,9 @@ ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 TOOLS_DIR="$ROOT_DIR/tools"
 JOBS=6
 
-mkdir -p "$TOOLS_DIR"/deps
+mkdir -p "$TOOLS_DIR"/sources
 
-pushd "$TOOLS_DIR"/deps
+pushd "$TOOLS_DIR"/sources
 
 if [ ! -d "yosys" ]; then
     git clone --depth 1 https://github.com/YosysHQ/yosys.git
@@ -43,7 +43,7 @@ if [ ! -d "icestorm" ]; then
 fi
 pushd icestorm
 make
-make DESTDIR="$TOOLS_DIR" install
+make PREFIX="$TOOLS_DIR" install
 popd
 
 if [ ! -d "nextpnr" ]; then
@@ -52,9 +52,9 @@ fi
 pushd nextpnr
 git submodule update --init --recursive
 mkdir -p build && cd build
-cmake .. -DARCH=ice40 -DICESTORM_INSTALL_PREFIX="$TOOLS_DIR"/usr/local
+cmake .. -DARCH=ice40 -DICESTORM_INSTALL_PREFIX="$TOOLS_DIR" -DCMAKE_INSTALL_PREFIX="$TOOLS_DIR"
 make -j $JOBS
-make DESTDIR="$TOOLS_DIR" install
+make install
 popd
 
 popd
