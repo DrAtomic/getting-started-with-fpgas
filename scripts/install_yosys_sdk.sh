@@ -7,10 +7,9 @@ ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 TOOLS_DIR="$ROOT_DIR/tools"
 JOBS=6
 
-mkdir -p deps
-mkdir -p "$TOOLS_DIR"
+mkdir -p "$TOOLS_DIR"/deps
 
-pushd deps
+pushd "$TOOLS_DIR"/deps
 
 if [ ! -d "yosys" ]; then
     git clone --depth 1 https://github.com/YosysHQ/yosys.git
@@ -18,7 +17,7 @@ fi
 pushd yosys
 git submodule update --init
 make -j $JOBS
-make install PREFIX="$TOOLS_DIR"
+make PREFIX="$TOOLS_DIR" install
 popd
 
 if [ ! -d "ghdl" ]; then
@@ -39,22 +38,22 @@ mkdir -p "$TOOLS_DIR"/share/yosys/plugins
 cp ghdl.so "$TOOLS_DIR"/share/yosys/plugins
 popd
 
+if [ ! -d "icestorm" ]; then
+    git clone --depth 1 https://github.com/YosysHQ/icestorm.git
+fi
+pushd icestorm
+make
+make DESTDIR="$TOOLS_DIR" install
+popd
+
 if [ ! -d "nextpnr" ]; then
     git clone --depth 1 https://github.com/YosysHQ/nextpnr.git
 fi
 pushd nextpnr
 git submodule update --init --recursive
 mkdir -p build && cd build
-cmake .. -DARCH=ice40
+cmake .. -DARCH=ice40 -DICESTORM_INSTALL_PREFIX="$TOOLS_DIR"/usr/local
 make -j $JOBS
-make DESTDIR="$TOOLS_DIR" install
-popd
-
-if [ ! -d "icestorm" ]; then
-    git clone --depth 1 https://github.com/YosysHQ/icestorm.git
-fi
-pushd icestorm
-make
 make DESTDIR="$TOOLS_DIR" install
 popd
 

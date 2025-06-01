@@ -106,13 +106,6 @@ for linux
 mkdir /usr/share/yosys/plugins
 cp ghdl.so /usr/share/yosys/plugins
 ```
-
-#### Nextpnr
-
-open-source place and route tool
-
-https://github.com/YosysHQ/nextpnr.git
-
 #### Icestorm
 
 open-source tool for creating bitstream files
@@ -126,6 +119,12 @@ in order to upload binaries to the FPGA, create a file `/etc/udev/rules.d/53-lat
 ```text
 ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6010", MODE="0660", GROUP="plugdev", TAG+="uaccess"
 ```
+
+#### Nextpnr
+
+open-source place and route tool
+
+https://github.com/YosysHQ/nextpnr.git
 
 ### Yosys sdk install
 

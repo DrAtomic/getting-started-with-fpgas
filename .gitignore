@@ -75,8 +75,10 @@ chapter10/State_Machine_Project_VHDL/*
 !chapter10/State_Machine_Project_VHDL/Binary_To_7Segment.vhd
 !chapter10/State_Machine_Project_VHDL/State_Machine_Project_VHDL_Implmnt/sbt/outputs/bitmap/State_Machine_Project_Top_bitmap.bin
 
+!.vscode/settings.json
+!chapter06/memory/.vscode/settings.json
+
 *.json
 *.bin
 *.asc
 tools
-*deps*
