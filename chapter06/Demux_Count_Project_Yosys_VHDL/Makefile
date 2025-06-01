@@ -4,8 +4,6 @@ PIN_DEF = ../../Go_Board_Pin_Constraints.pcf
 DEVICE = hx1k
 PACKAGE = vq100
 
-WORK_DIR = work
-
 SRCS =  ../Demux_Count_Project_VHDL/Count_And_Toggle.vhd \
 	../Mux_Demux/Demux_1_To_4.vhd \
 	../Demux_Count_Project_VHDL/Demux_Count_Project_Top.vhd
@@ -13,23 +11,20 @@ SRCS =  ../Demux_Count_Project_VHDL/Count_And_Toggle.vhd \
 all: upload
 
 # synthesis
-$(WORK_DIR)/$(PROJ).json: $(SRCS) $(WORK_DIR)
-	yosys -m ghdl -p 'ghdl --std=08 $(SRCS) --workdir=$(WORK_DIR) -e Demux_LFSR_Project_Top; synth_ice40 -json $(WORK_DIR)/$(PROJ).json'
-
-$(WORK_DIR):
-	mkdir -p work
+$(PROJ).json: $(SRCS)
+	yosys -m ghdl -p 'ghdl --std=08 $(SRCS) -e Demux_LFSR_Project_Top; synth_ice40 -json $(PROJ).json'
 
 # place and route
-$(WORK_DIR)/$(PROJ).asc: $(WORK_DIR)/$(PROJ).json $(PIN_DEF)
-	nextpnr-ice40 --$(DEVICE) --package $(PACKAGE) --json $(WORK_DIR)/$(PROJ).json --pcf $(PIN_DEF) --asc $(WORK_DIR)/$(PROJ).asc
+$(PROJ).asc: $(PROJ).json $(PIN_DEF)
+	nextpnr-ice40 --$(DEVICE) --package $(PACKAGE) --json $(PROJ).json --pcf $(PIN_DEF) --asc $(PROJ).asc
 
 # create bin
-$(WORK_DIR)/$(PROJ).bin: $(WORK_DIR)/$(PROJ).asc
-	icepack $(WORK_DIR)/$(PROJ).asc $(WORK_DIR)/$(PROJ).bin
+$(PROJ).bin: $(PROJ).asc
+	icepack $(PROJ).asc $(PROJ).bin
 
 # upload design
-upload: $(WORK_DIR)/$(PROJ).bin
-	iceprog $(WORK_DIR)/$(PROJ).bin
+upload: $(PROJ).bin
+	iceprog $(PROJ).bin
 
 clean:
-	rm -r $(WORK_DIR)
+	rm $(PROJ).json $(PROJ).asc $(PROJ).bin
