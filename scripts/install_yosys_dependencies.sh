@@ -23,4 +23,4 @@ sudo apt-get install build-essential clang bison flex libreadline-dev \
 # udev rules for uploading binaries
 echo "ATTRS{idVendor}==\"0403\", ATTRS{idProduct}==\"6010\", MODE=\"0660\", GROUP=\"plugdev\", TAG+=\"uaccess\"" | sudo tee /etc/udev/rules.d/53-lattice-ftdi.rules > /dev/null
 
-sudo udevadm control --reload-rules && udevadm trigger
+sudo udevadm control --reload-rules && sudo udevadm trigger
