@@ -7,6 +7,9 @@ PACKAGE = vq100
 SRCS = ../timing_error.vhd
 
 all: $(PROJ).bin
+synthesis: $(PROJ).json
+place_and_route: $(PROJ).asc
+create_bin: $(PROJ).bin
 
 # synthesis
 $(PROJ).json: $(SRCS)

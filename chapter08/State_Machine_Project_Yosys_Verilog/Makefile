@@ -12,6 +12,9 @@ SRCS = ../State_Machine_Project_Verilog/State_Machine_Project_Top.v \
 	../../chapter05/Debounce_Filter.v
 
 all: upload
+synthesis: $(PROJ).json
+place_and_route: $(PROJ).asc
+create_bin: $(PROJ).bin
 
 # synthesis
 $(PROJ).json: $(SRCS)

@@ -9,6 +9,9 @@ SRCS =  ../Demux_Count_Project_VHDL/Count_And_Toggle.vhd \
 	../Demux_Count_Project_VHDL/Demux_Count_Project_Top.vhd
 
 all: upload
+synthesis: $(PROJ).json
+place_and_route: $(PROJ).asc
+create_bin: $(PROJ).bin
 
 # synthesis
 $(PROJ).json: $(SRCS)

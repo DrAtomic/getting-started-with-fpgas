@@ -7,6 +7,9 @@ PACKAGE = vq100
 SRCS = ../LED_Toggle_Project.v
 
 all: upload
+synthesis: $(PROJ).json
+place_and_route: $(PROJ).asc
+create_bin: $(PROJ).bin
 
 # synthesis
 $(PROJ).json: $(SRCS)

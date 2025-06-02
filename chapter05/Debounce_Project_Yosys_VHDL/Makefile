@@ -9,6 +9,9 @@ SRCS = ../../chapter04/LED_Toggle_Project.vhd \
 	../Debounce_Project_Top.vhd
 
 all: upload
+synthesis: $(PROJ).json
+place_and_route: $(PROJ).asc
+create_bin: $(PROJ).bin
 
 # synthesis
 $(PROJ).json: $(SRCS)

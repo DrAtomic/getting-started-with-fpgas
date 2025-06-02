@@ -7,6 +7,9 @@ PACKAGE = vq100
 SRCS = ../Switches_To_LEDs.vhd
 
 all: upload
+synthesis: $(PROJ).json
+place_and_route: $(PROJ).asc
+create_bin: $(PROJ).bin
 
 # synthesis
 $(PROJ).json: $(SRCS)

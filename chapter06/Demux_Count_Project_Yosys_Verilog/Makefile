@@ -9,6 +9,9 @@ SRCS = ./Count_And_Toggle.v \
 	../Mux_Demux/Demux_1_To_4.v
 
 all: upload
+synthesis: $(PROJ).json
+place_and_route: $(PROJ).asc
+create_bin: $(PROJ).bin
 
 # synthesis
 $(PROJ).json: $(SRCS)

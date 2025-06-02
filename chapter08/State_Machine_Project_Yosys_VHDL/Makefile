@@ -12,6 +12,9 @@ SRCS = ./Binary_To_7Segment.vhd \
 	../State_Machine_Project_VHDL/State_Machine_Project_Top.vhd \
 
 all: upload
+synthesis: $(PROJ).json
+place_and_route: $(PROJ).asc
+create_bin: $(PROJ).bin
 
 # synthesis
 $(PROJ).json: $(SRCS)
