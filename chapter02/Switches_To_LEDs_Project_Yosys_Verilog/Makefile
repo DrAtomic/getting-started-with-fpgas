@@ -28,4 +28,4 @@ upload: $(PROJ).bin
 	iceprog $(PROJ).bin
 
 clean:
-	rm $(PROJ).json $(PROJ).asc $(PROJ).bin
+	rm -f $(PROJ).json $(PROJ).asc $(PROJ).bin
