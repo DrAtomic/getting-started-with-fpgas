@@ -57,6 +57,18 @@ make -j $JOBS
 make install
 popd
 
+# my own fork of gtkwave for automatic reloading
+# this is until they upstream my patch
+if [ ! -d "gtkwave" ]; then
+    git clone --depth 1 https://github.com/DrAtomic/gtkwave.git
+fi
+pushd gtkwave
+meson setup build --prefix="$TOOLS_DIR"
+cd build
+meson compile -j $JOBS
+meson install
+popd
+
 popd
 
 echo ""

@@ -20,6 +20,11 @@ sudo apt-get install build-essential clang bison flex libreadline-dev \
      libftdi-dev qt5-default python3-dev \
      libboost-all-dev cmake
 
+## this is until they upstream my patch
+# gtkwave dependencies
+sudo apt install build-essential meson gperf flex desktop-file-utils libgtk-3-dev \
+     libbz2-dev libjudy-dev libgirepository1.0-dev
+
 # udev rules for uploading binaries
 echo "ATTRS{idVendor}==\"0403\", ATTRS{idProduct}==\"6010\", MODE=\"0660\", GROUP=\"plugdev\", TAG+=\"uaccess\"" | sudo tee /etc/udev/rules.d/53-lattice-ftdi.rules > /dev/null
 
