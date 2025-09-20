@@ -70,6 +70,16 @@ meson compile -j $JOBS
 meson install
 popd
 
+if [ ! -d "iverilog" ]; then
+    git clone --branch=v12_0 --depth 1 https://github.com/steveicarus/iverilog.git
+fi
+pushd iverilog
+sh autoconf.sh
+./configure --prefix="$TOOLS_DIR"
+make -j $JOBS
+make install
+popd
+
 popd
 
 echo ""

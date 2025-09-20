@@ -25,6 +25,9 @@ sudo apt-get install build-essential clang bison flex libreadline-dev \
 sudo apt install build-essential meson gperf flex desktop-file-utils libgtk-3-dev \
      libbz2-dev libjudy-dev libgirepository1.0-dev
 
+# iverilog dependencies
+sudo apt install autoconf gperf make gcc g++ bison flex
+
 # udev rules for uploading binaries
 echo "ATTRS{idVendor}==\"0403\", ATTRS{idProduct}==\"6010\", MODE=\"0660\", GROUP=\"plugdev\", TAG+=\"uaccess\"" | sudo tee /etc/udev/rules.d/53-lattice-ftdi.rules > /dev/null
 
