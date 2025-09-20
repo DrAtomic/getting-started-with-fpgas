@@ -25,6 +25,11 @@ $(PROJ).asc: $(PROJ).json $(PIN_DEF)
 $(PROJ).bin: $(PROJ).asc
 	icepack $(PROJ).asc $(PROJ).bin
 
+test:
+	ghdl -a --std=08 $(SRCS) ../Debounce_Filter_TB.vhd
+	ghdl -e --std=08 Debounce_Filter_TB
+	ghdl -r --std=08 Debounce_Filter_TB --wave=$(PROJ).ghw
+
 # upload design
 upload: $(PROJ).bin
 	iceprog $(PROJ).bin

@@ -29,5 +29,9 @@ $(PROJ).bin: $(PROJ).asc
 upload: $(PROJ).bin
 	iceprog $(PROJ).bin
 
+test:
+	iverilog -o Debounce_Filter_TB.vvp $(SRCS) ../Debounce_Filter_TB.v
+	vvp Debounce_Filter_TB.vvp
+
 clean:
 	rm -f $(PROJ).json $(PROJ).asc $(PROJ).bin

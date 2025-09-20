@@ -82,3 +82,7 @@ chapter10/State_Machine_Project_VHDL/*
 *.bin
 *.asc
 tools
+*.ghw
+*.cf
+*.vvp
+*.vcd
