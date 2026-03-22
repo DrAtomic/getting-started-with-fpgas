@@ -12,10 +12,10 @@ architecture test of RAM_2Port_TB is
   constant DEPTH : integer := 4;
 
   signal r_Clock   : std_logic := '0';
-  signal r_Wr_Addr : unsigned(1 downto 0) := (others => '0');
-  signal r_Rd_Addr : unsigned(1 downto 0) := (others => '0');
+  signal r_Wr_Addr : std_logic_vector(1 downto 0) := (others => '0');
+  signal r_Rd_Addr : std_logic_vector(1 downto 0) := (others => '0');
   signal r_Wr_DV   : std_logic := '0';
-  signal r_Wr_Data : unsigned(WIDTH-1 downto 0) := (others => '0');
+  signal r_Wr_Data : std_logic_vector(WIDTH-1 downto 0) := (others => '0');
   signal r_Rd_En   : std_logic := '0';
   signal w_Rd_DV   : std_logic;
   signal w_Rd_Data : std_logic_vector(WIDTH-1 downto 0);
@@ -30,11 +30,11 @@ begin
       DEPTH => DEPTH)
     port map (
       i_Wr_Clk  => r_Clock,
-      i_Wr_Addr => std_logic_vector(r_Wr_Addr),
+      i_Wr_Addr => r_Wr_Addr,
       i_Wr_DV   => r_Wr_DV,
-      i_Wr_Data => std_logic_vector(r_Wr_Data),
+      i_Wr_Data => r_Wr_Data,
       i_Rd_Clk  => r_Clock,
-      i_Rd_Addr => std_logic_vector(r_Rd_Addr),
+      i_Rd_Addr => r_Rd_Addr,
       i_Rd_En   => r_Rd_En,
       o_Rd_DV   => w_Rd_DV,
       o_Rd_Data => w_Rd_Data);
@@ -48,8 +48,8 @@ begin
     for i in 0 to DEPTH-1 loop
       r_Wr_DV <= '1';
       wait until r_Clock = '1';
-      r_Wr_Data <= r_Wr_Data + 1;
-      r_Wr_Addr <= r_Wr_Addr + 1;
+      r_Wr_Data <= std_logic_vector(unsigned(r_Wr_Data) + 1);
+      r_Wr_Addr <= std_logic_vector(unsigned(r_Wr_Addr) + 1);
     end loop;
 
     -- Read out incrementing pattern
@@ -59,7 +59,7 @@ begin
     for i in 0 to DEPTH-1 loop
       r_Rd_En <= '1';
       wait until r_Clock = '1';
-      r_Rd_Addr <= r_Rd_Addr + 1;
+      r_Rd_Addr <= std_logic_vector(unsigned(r_Rd_Addr) + 1);
     end loop;
 
     r_Rd_En <= '0';

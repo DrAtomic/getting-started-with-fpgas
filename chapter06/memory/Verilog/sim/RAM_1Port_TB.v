@@ -50,7 +50,7 @@ module RAM_1Port_TB ();
       @(posedge r_Clk);
       r_Addr <= r_Addr + 1;
 	  end
-    r_Rd_En <= 0'b1;
+    r_Rd_En <= 1'b0;
 
     repeat(4) @(posedge r_Clk); // Give simulation a few clocks to end
 
