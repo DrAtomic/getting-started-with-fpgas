@@ -49,7 +49,7 @@ make PREFIX="$TOOLS_DIR" install
 popd
 
 if [ ! -d "nextpnr" ]; then
-    git clone --branch=nextpnr-0.9 --depth 1 https://github.com/YosysHQ/nextpnr.git
+    git clone --branch=nextpnr-0.10 --depth 1 https://github.com/YosysHQ/nextpnr.git
 fi
 pushd nextpnr
 git submodule update --init --recursive
