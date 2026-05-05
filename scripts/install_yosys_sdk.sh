@@ -12,7 +12,7 @@ mkdir -p "$TOOLS_DIR"/sources
 pushd "$TOOLS_DIR"/sources
 
 if [ ! -d "yosys" ]; then
-    git clone --branch=v0.57 --depth 1 https://github.com/YosysHQ/yosys.git
+    git clone --branch=v0.64 --depth 1 https://github.com/YosysHQ/yosys.git
 fi
 pushd yosys
 git submodule update --init
@@ -21,7 +21,7 @@ make PREFIX="$TOOLS_DIR" install
 popd
 
 if [ ! -d "ghdl" ]; then
-    git clone --branch=v5.1.1 --depth 1 https://github.com/ghdl/ghdl.git
+    git clone --branch=v6.0.0 --depth 1 https://github.com/ghdl/ghdl.git
 fi
 pushd ghdl
 ./configure --prefix="$TOOLS_DIR"
@@ -29,9 +29,8 @@ make -j $JOBS
 make install
 popd
 
-## my fork so I can use the tag
 if [ ! -d "ghdl-yosys-plugin" ]; then
-    git clone --branch=v0.0.1 --depth 1 https://github.com/DrAtomic/ghdl-yosys-plugin.git
+    git clone --branch=ghdl-v6.0.0 --depth 1 https://github.com/ghdl/ghdl-yosys-plugin.git
 fi
 pushd ghdl-yosys-plugin
 make CFLAGS="-I/$TOOLS_DIR/share/yosys/include" YOSYS_CONFIG="$TOOLS_DIR"/bin/yosys-config GHDL="$TOOLS_DIR"/bin/ghdl
@@ -71,7 +70,7 @@ meson install
 popd
 
 if [ ! -d "iverilog" ]; then
-    git clone --branch=v12_0 --depth 1 https://github.com/steveicarus/iverilog.git
+    git clone --branch=v13_0 --depth 1 https://github.com/steveicarus/iverilog.git
 fi
 pushd iverilog
 sh autoconf.sh
